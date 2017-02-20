@@ -1,0 +1,18 @@
+.node-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.node {
+    flex: 0 1 32%;
+    margin-bottom: 20px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+
+@media (max-width: 400px) {
+    .node-grid {
+        display: block;
+    }
+}
