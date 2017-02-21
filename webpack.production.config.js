@@ -1,6 +1,7 @@
-var webpack = require('webpack')
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+let webpack = require('webpack')
+let path = require('path')
+let HtmlWebpackPlugin = require('html-webpack-plugin')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -17,22 +18,26 @@ module.exports = {
       {
         test: /\.js?$/,
         exclude: /(node_modules|bower_components|public\/)/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react']
+        }
       },
       {
-        test: /\.gif/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'url-loader?limit=10000&mimetype=image/gif'
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
       },
       {
-        test: /\.jpg/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'url-loader?limit=10000&mimetype=image/jpg'
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'url-loader'
       },
       {
-        test: /\.png/,
+        test: /\.(gif|jpg|png)/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'url-loader?limit=10000&mimetype=image/png'
+        loader: 'url-loader?limit=10000'
       }
     ]
   },
