@@ -7,8 +7,32 @@
 .node {
     flex: 0 1 32%;
     margin-bottom: 20px;
+    padding: 10px;
     border: 1px solid #000;
     box-sizing: border-box;
+}
+
+.node h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.status {
+    text-align: center;
+}
+
+.status-icon {
+    margin-right: 10px;
+}
+
+.status-text {
+    font-weight: bold;
+}
+
+.node-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
 }
 
 @media (max-width: 400px) {

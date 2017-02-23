@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'url-loader'
+        loader: 'url-loader?limit=10000'
       },
       {
         test: /\.(gif|jpg|png)/,
@@ -47,6 +47,8 @@ module.exports = {
         NODE_ENV: '"production"'
       }
     }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -55,10 +57,9 @@ module.exports = {
         drop_debugger: true
       }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './template.html',
+      template: path.join(__dirname, 'src', 'template.html'),
       inject: 'body'
     })
   ]

@@ -28,7 +28,7 @@ Or run [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard):
 npm run dev
 ```
 
-Open the web browser to `http://localhost:8080/`
+Open the web browser to `http://localhost:8888/`
 
 ## Prod Build
 

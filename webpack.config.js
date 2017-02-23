@@ -1,11 +1,9 @@
 let webpack = require('webpack')
 let path = require('path')
-let DashboardPlugin = require('webpack-dashboard/plugin')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
 let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const HOST = process.env.HOST || '127.0.0.1'
-const PORT = process.env.PORT || '8080'
+const DEV_SERVER_PORT = '3000'
 
 module.exports = {
   entry: './src/index.js',
@@ -47,21 +45,19 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: './public',
+    contentBase: path.join(__dirname, 'public'),
     noInfo: true,
     hot: true,
     inline: true,
     historyApiFallback: true,
-    port: PORT,
-    host: HOST
+    port: DEV_SERVER_PORT
   },
   plugins: [
     new ExtractTextPlugin('bundle.css'),
-    new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: './template.html',
+      template: path.join(__dirname, 'src', 'template.html'),
       inject: 'body'
     })
   ]

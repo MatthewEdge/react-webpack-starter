@@ -1,19 +1,22 @@
 {
-  "name": "react-webpack-starter",
+  "name": "bunsen-gui",
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "webpack --progress --profile --colors",
-    "dist": "webpack --config webpack.production.config.js --progress --profile --colors",
-    "start": "webpack-dev-server --progress --profile --colors",
-    "lint": "standard",
-    "dev": "webpack-dashboard -- webpack-dev-server --progress --profile --colors"
+    "build": "webpack --progress --colors",
+    "wds": "webpack-dev-server --progress --colors",
+    "start": "npm-run-all --parallel wds devServer",
+    "lint": "standard --fix",
+    "devServer": "node devServer.js"
   },
   "author": "Matthew Edge",
   "license": "MIT",
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "react-dom": "15.4.2",
+    "react-router": "^3.0.2",
+    "socket.io-client": "^1.7.3"
   },
   "devDependencies": {
     "babel-core": "6.23.1",
@@ -24,7 +27,9 @@
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.26.0",
+    "npm-run-all": "^4.0.1",
     "react-hot-loader": "^3.0.0-beta.6",
+    "socket.io": "^1.7.3",
     "standard": "^8.6.0",
     "style-loader": "^0.13.1",
     "url-loader": "0.5.7",

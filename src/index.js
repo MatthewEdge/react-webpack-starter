@@ -1,17 +1,16 @@
+/* @author medge */
+
 import React from 'react'
 import { render } from 'react-dom'
-import App from './App.js'
+import { Router, Route, browserHistory } from 'react-router'
 
-const nodes = [
-  { name: 'Node A' },
-  { name: 'Node B' },
-  { name: 'Node C' },
-  { name: 'Node D' },
-  { name: 'Node E' },
-  { name: 'Node F' }
-]
+import NodeGrid from './nodes/NodeGrid'
+import NodeLog from './nodes/NodeLog'
 
 render(
-  <App nodes={nodes} />,
+  <Router history={browserHistory}>
+    <Route path='/' component={NodeGrid} />
+    <Route path='/logs/:nodeName' component={NodeLog} />
+  </Router>,
   document.querySelector('#app')
 )
