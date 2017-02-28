@@ -2,8 +2,8 @@
 
 import React from 'react'
 
-import {connect, disconnect} from './SocketMaster'
-import {navigate} from '../Navigator'
+import { connect, disconnect } from './SocketMaster'
+import { navigate } from '../Navigator'
 
 import './Node.css'
 
@@ -21,7 +21,7 @@ const STATES = {
  * Control element for a particular Vagrant Node
  */
 class Node extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -41,19 +41,23 @@ class Node extends React.Component {
     this.onError = this.onError.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // Connect to the server for Node Logs
     this.socket = connect(NODE_INFO_CHANNEL, this.state.node, this.onMessage, this.onError)
   }
 
-  onMessage (data) {
-    console.log("STATUS: " + data.status)
+  componentWillUnmount() {
+    disconnect(this.socket)
+  }
+
+  onMessage(data) {
+    console.log(`STATUS: ${data.status}`)
     this.setState({
       status: data.status
     })
   }
 
-  onError (e) {
+  onError(e) {
     console.error(`Error receiving info: ${JSON.stringify(e)}`)
 
     this.setState({
@@ -61,21 +65,62 @@ class Node extends React.Component {
     })
   }
 
-  componentWillUnmount () {
-    disconnect(this.socket)
+  colorForStatus() {
+    const _status = this.state.status.toLowerCase()
+
+    if (_status === STATES.UP) {
+      return 'green'
+    }
+    else if ([STATES.RUNNING, STATES.LOADING].includes(_status)) {
+      return 'black'
+    }
+
+    return 'red'
   }
 
-  render () {
+  up() {
+    console.log(`Up: ${this.props.node.name}`)
+    this.triggerRunning()
+  }
+
+  down() {
+    console.log(`Down: ${this.props.node.name}`)
+    this.triggerRunning()
+  }
+
+  provision() {
+    console.log(`Provision: ${this.props.node.name}`)
+    this.triggerRunning()
+  }
+
+  suspend() {
+    console.log(`Suspend: ${this.props.node.name}`)
+    this.triggerRunning()
+  }
+
+  triggerRunning() {
+    if (this.state.status !== STATES.RUNNING) {
+      this.setState({
+        status: STATES.RUNNING
+      })
+    }
+  }
+
+  logs() {
+    navigate(`/logs/${this.props.node.name}`)
+  }
+
+  render() {
     const nodeName = this.state.node
     const status = this.state.status
 
     return (
-      <div className='node'>
+      <div className="node">
         <h3>{nodeName}</h3>
-        <p className='status'>
-          <span className='status-text' style={{ color: this.colorFor(status) }}>{status.toUpperCase()}</span>
+        <p className="status">
+          <span className="status-text" style={{ color: this.colorForStatus() }}>{status.toUpperCase()}</span>
         </p>
-        <p className='node-buttons'>
+        <p className="node-buttons">
           <button onClick={this.up}>Up</button>
           <button onClick={this.down}>Down</button>
           <button onClick={this.provision}>Provision</button>
@@ -84,54 +129,6 @@ class Node extends React.Component {
         </p>
       </div>
     )
-  }
-
-  colorFor (status) {
-    let _status = status.toLowerCase()
-
-    if (_status === STATES.UP) {
-      return 'green'
-    } else if ([STATES.RUNNING, STATES.LOADING].includes(_status)) {
-      return 'black'
-    } else {
-      return 'red'
-    }
-  }
-
-  up () {
-    // TODO
-    console.log(`Up: ${this.props.node.name}`)
-    this.triggerRunning()
-  }
-
-  down () {
-    // TODO
-    console.log(`Down: ${this.props.node.name}`)
-    this.triggerRunning()
-  }
-
-  provision () {
-    // TODO
-    console.log(`Provision: ${this.props.node.name}`)
-    this.triggerRunning()
-  }
-
-  suspend () {
-    // TODO
-    console.log(`Suspend: ${this.props.node.name}`)
-    this.triggerRunning()
-  }
-
-  triggerRunning () {
-    if (this.state.status !== STATES.RUNNING) {
-      this.setState({
-        status: STATES.RUNNING
-      })
-    }
-  }
-
-  logs () {
-    navigate('/logs/' + this.props.node.name)
   }
 }
 

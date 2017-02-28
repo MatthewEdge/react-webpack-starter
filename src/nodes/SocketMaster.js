@@ -11,11 +11,11 @@ const NODE_SOCKET = 'http://localhost:8080/'
  * @param onError (err) => {}
  * @returns {Object} WebSocket container
  */
-export function connect (channel, payload, onSuccess, onError) {
-  let ws = io.connect(NODE_SOCKET)
+export function connect(channel, payload, onSuccess, onError) {
+  const ws = io.connect(NODE_SOCKET)
 
   // Connect and request logs
-  ws.on('connect', function socketOpened () {
+  ws.on('connect', function socketOpened() {
     console.log(`${channel} opened`)
 
     if (payload) {
@@ -24,11 +24,11 @@ export function connect (channel, payload, onSuccess, onError) {
   })
 
   // When received, pass back
-  ws.on(channel, function onResponse (resp) {
+  ws.on(channel, function onResponse(resp) {
     onSuccess(resp)
   })
 
-  ws.on('error', function nodeLogsError (e) {
+  ws.on('error', function nodeLogsError(e) {
     console.error(`Failed to communicate with ${channel}: ${e}`)
 
     onError(e)
@@ -45,7 +45,7 @@ export function connect (channel, payload, onSuccess, onError) {
  * @param onError (e) => Action on Socket error
  * @return {Object} WebSocket container
  */
-export function nodeLogsSocket (nodeName, onMessage, onError) {
+export function nodeLogsSocket(nodeName, onMessage, onError) {
   return connect('nodeLogs', nodeName, onMessage, onError)
 }
 
@@ -54,6 +54,6 @@ export function nodeLogsSocket (nodeName, onMessage, onError) {
  *
  * @param ws Socket instance
  */
-export function disconnect (ws) {
+export function disconnect(ws) {
   ws.disconnect()
 }

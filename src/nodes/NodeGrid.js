@@ -5,7 +5,7 @@ import Node from './Node'
 
 class NodeGrid extends React.Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -13,7 +13,7 @@ class NodeGrid extends React.Component {
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     // TODO extract to REST call
     const nodes = [
       { name: 'ap-service-discovery-server-0' },
@@ -25,13 +25,13 @@ class NodeGrid extends React.Component {
     ]
 
     this.setState({
-      nodes: nodes
+      nodes
     })
   }
 
-  render () {
+  render() {
     return (
-      <div className='node-grid'>
+      <div className="node-grid">
         {this.state.nodes.map(nodeDef =>
           <Node node={nodeDef} key={nodeDef.name} />
         )}

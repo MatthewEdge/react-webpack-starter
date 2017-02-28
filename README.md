@@ -1,12 +1,20 @@
 # React & Webpack Starter
 
-Starter project for current React / Webpack
+Starter project for current React / Webpack / CSS Modules
 
 ## Features
 
 * React with CSS modules
-* Webpack configuration for development (with hot reloading) and production (with minification).
-* [Webpack Dashboard Plugin](https://github.com/FormidableLabs/webpack-dashboard) on dev server.
+
+## Webpack Configuration
+
+Webpack Configuration is done a la [https://github.com/jake-wies/webpack-hotplate](https://github.com/jake-wies/webpack-hotplate)
+
+`webpack.parts.js` defines each section of configuration (CSS, JS, plugins, etc) based on the value of `process.env.NODE_ENV`. 
+
+`webpack.config.js` then merges the appropriate config pieces together to form the final config file
+
+It allows for a modular yet lightweight (read: less duplicated) Webpack configuration
 
 ## Running
 
@@ -22,24 +30,6 @@ Run development server:
 npm start
 ```
 
-Or run [webpack-dashboard](https://github.com/FormidableLabs/webpack-dashboard):
-
-```
-npm run dev
-```
-
-Open the web browser to `http://localhost:8888/`
-
-## Prod Build
-
-```
-npm run dist
-```
-
 ## Linting
 
-Linting is handled by the `standard` linting tool
-
-```
-npm run lint
-```
+Linting is run during the build process and utilizes `ESLint` for linting

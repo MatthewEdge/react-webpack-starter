@@ -1,41 +1,77 @@
-let webpack = require('webpack')
-let path = require('path')
-let HtmlWebpackPlugin = require('html-webpack-plugin')
-let ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const Parts = require('./webpack.parts')
 
 const DEV_SERVER_PORT = '3000'
 
-module.exports = {
-  entry: './src/index.js',
-  devtool: 'source-map',
+module.exports = function(env) {
+  if(env === 'production') {
+     return merge([
+      Common,
+      Parts.devTool(env),
+      Parts.CSS(env),
+      Parts.plugins(env)
+    ])
+  }
+  else {
+    // DEV gets the Dev Server
+    return merge([
+      Common,
+      Parts.devServer(DEV_SERVER_PORT),
+      Parts.devTool(env),
+      Parts.CSS(env),
+      Parts.plugins(env)
+    ])
+  }
+}
+
+const Common = merge([{
+  entry: {
+    main: './src/index.js'
+  },
   output: {
     publicPath: '/',
     path: path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: '[name].bundle.js' // From entry key
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.css']
   },
   module: {
-    loaders: [
+    rules: [
+      // ESLint loader for all builds
       {
-        test: /\.js?$/,
-        exclude: /(node_modules|bower_components|public\/)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react']
-        }
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        include: path.join(__dirname, 'src'),
+        exclude: /node_modules/,
+        use: [ 'eslint-loader' ]
       },
+
+      // Babel loader for all builds
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                'react',
+                ['es2015', {"modules": false}]
+              ]
+            }
+          }
+        ]
       },
+
+      // Assets loaders
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'url-loader'
+        loader: 'url-loader?limit=10000'
       },
       {
         test: /\.(gif|jpg|png)/,
@@ -44,21 +80,11 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    noInfo: true,
-    hot: true,
-    inline: true,
-    historyApiFallback: true,
-    port: DEV_SERVER_PORT
-  },
   plugins: [
-    new ExtractTextPlugin('bundle.css'),
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.join(__dirname, 'src', 'template.html'),
       inject: 'body'
     })
   ]
-}
+}])

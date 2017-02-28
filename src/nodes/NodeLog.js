@@ -1,11 +1,12 @@
 import React from 'react'
 
-import {connect, disconnect} from './SocketMaster'
+import { connect, disconnect } from './SocketMaster'
 
 const NODE_LOGS_CHANNEL = 'nodeLogs'
 
 class NodeLog extends React.Component {
-  constructor (props) {
+
+  constructor(props) {
     super(props)
 
     this.socket = null
@@ -19,18 +20,22 @@ class NodeLog extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // Connect to the server for Node Logs
     this.socket = connect(NODE_LOGS_CHANNEL, this.state.node, this.onMessage, this.onError)
   }
 
-  onMessage (data) {
+  componentWillUnmount() {
+    disconnect(this.socket)
+  }
+
+  onMessage(data) {
     this.setState({
       logs: data.logs
     })
   }
 
-  onError (e) {
+  onError(e) {
     console.error(`Error receiving logs: ${JSON.stringify(e)}`)
 
     this.setState({
@@ -38,11 +43,7 @@ class NodeLog extends React.Component {
     })
   }
 
-  componentWillUnmount () {
-    disconnect(this.socket)
-  }
-
-  render () {
+  render() {
     return (
       <div>
         <p>{this.state.node}</p>
@@ -51,6 +52,11 @@ class NodeLog extends React.Component {
     )
   }
 
+}
+
+NodeLog.propTypes = {
+  // TODO how to validate a prop that is set by react-router and satisfy eslint?
+  params: React.PropTypes.object.isRequired
 }
 
 export default NodeLog
