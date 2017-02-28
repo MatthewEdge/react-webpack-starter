@@ -1,7 +1,9 @@
 /* @author medge */
 
 import React from 'react'
-import Node from './Node'
+import Node from './nodes/Node'
+
+import styles from './Dashboard.css'
 
 class NodeGrid extends React.Component {
 
@@ -31,7 +33,7 @@ class NodeGrid extends React.Component {
 
   render() {
     return (
-      <div className="node-grid">
+      <div className={styles.grid}>
         {this.state.nodes.map(nodeDef =>
           <Node node={nodeDef} key={nodeDef.name} />
         )}

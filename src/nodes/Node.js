@@ -5,7 +5,7 @@ import React from 'react'
 import { connect, disconnect } from './SocketMaster'
 import { navigate } from '../Navigator'
 
-import './Node.css'
+import styles from './Node.css'
 
 const NODE_INFO_CHANNEL = 'nodeInfo'
 
@@ -30,7 +30,7 @@ class Node extends React.Component {
     }
 
     // Init function bindings
-    this.colorFor = this.colorFor.bind(this)
+    this.colorForStatus = this.colorForStatus.bind(this)
     this.up = this.up.bind(this)
     this.down = this.down.bind(this)
     this.provision = this.provision.bind(this)
@@ -115,12 +115,12 @@ class Node extends React.Component {
     const status = this.state.status
 
     return (
-      <div className="node">
+      <div className={styles.node}>
         <h3>{nodeName}</h3>
-        <p className="status">
-          <span className="status-text" style={{ color: this.colorForStatus() }}>{status.toUpperCase()}</span>
+        <p className={styles.status}>
+          <span className={styles.statusText} style={{ color: this.colorForStatus() }}>{status.toUpperCase()}</span>
         </p>
-        <p className="node-buttons">
+        <p className={styles.buttons}>
           <button onClick={this.up}>Up</button>
           <button onClick={this.down}>Down</button>
           <button onClick={this.provision}>Provision</button>

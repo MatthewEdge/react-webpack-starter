@@ -1,9 +1,3 @@
-.node-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
 .node {
     flex: 0 1 32%;
     margin-bottom: 20px;
@@ -19,24 +13,11 @@
 
 .status {
     text-align: center;
-}
-
-.status-icon {
-    margin-right: 10px;
-}
-
-.status-text {
     font-weight: bold;
 }
 
-.node-buttons {
+.buttons {
     display: flex;
     justify-content: center;
     margin-bottom: 0;
-}
-
-@media (max-width: 400px) {
-    .node-grid {
-        display: block;
-    }
 }

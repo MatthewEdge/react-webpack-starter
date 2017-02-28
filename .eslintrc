@@ -9,6 +9,8 @@
     "react"
   ],
   "rules": {
+    // Line length
+    "max-len": "off",
     // No semicolons required
     "semi": "off",
     // No trailing comma shenanigans
