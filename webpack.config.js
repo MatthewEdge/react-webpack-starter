@@ -9,7 +9,7 @@ const DEV_SERVER_PORT = '3000'
 
 module.exports = function(env) {
   if(env === 'production') {
-     return merge([
+    return merge([
       Common,
       Parts.devTool(env),
       Parts.CSS(env),
@@ -28,63 +28,65 @@ module.exports = function(env) {
   }
 }
 
-const Common = merge([{
-  entry: {
-    main: './src/index.js'
-  },
-  output: {
-    publicPath: '/',
-    path: path.join(__dirname, 'public'),
-    filename: '[name].bundle.js' // From entry key
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.css']
-  },
-  module: {
-    rules: [
-      // ESLint loader for all builds
-      {
-        enforce: 'pre',
-        test: /\.jsx?$/,
-        include: path.join(__dirname, 'src'),
-        exclude: /node_modules/,
-        use: [ 'eslint-loader' ]
-      },
+const Common = merge([
+  {
+    entry: {
+      main: './src/index.js'
+    },
+    output: {
+      publicPath: '/',
+      path: path.join(__dirname, 'public'),
+      filename: '[name].bundle.js' // From entry key
+    },
+    resolve: {
+      extensions: ['.js', '.jsx', '.css']
+    },
+    module: {
+      rules: [
+        // ESLint loader for all builds
+        {
+          enforce: 'pre',
+          test: /\.jsx?$/,
+          include: path.join(__dirname, 'src'),
+          exclude: /node_modules/,
+          use: [ 'eslint-loader' ]
+        },
 
-      // Babel loader for all builds
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                'react',
-                ['es2015', {"modules": false}]
-              ]
+        // Babel loader for all builds
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  'react',
+                  ['es2015', { "modules": false } ]
+                ]
+              }
             }
-          }
-        ]
-      },
+          ]
+        },
 
-      // Assets loaders
-      {
-        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'url-loader?limit=10000'
-      },
-      {
-        test: /\.(gif|jpg|png)/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'url-loader?limit=10000'
-      }
+        // Assets loaders
+        {
+          test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+          loader: 'url-loader?limit=10000'
+        },
+        {
+          test: /\.(gif|jpg|png)/,
+          exclude: /(node_modules|bower_components)/,
+          loader: 'url-loader?limit=10000'
+        }
+      ]
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: path.join(__dirname, 'src', 'template.html'),
+        inject: 'body'
+      })
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.join(__dirname, 'src', 'template.html'),
-      inject: 'body'
-    })
-  ]
-}])
+  }
+])
