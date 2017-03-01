@@ -38,18 +38,6 @@ export function connect(channel, payload, onSuccess, onError) {
 }
 
 /**
- * Connect to the Node Logs Socket
- *
- * @param nodeName Node name to fetch logs for
- * @param onMessage (e) => Action on message received
- * @param onError (e) => Action on Socket error
- * @return {Object} WebSocket container
- */
-export function nodeLogsSocket(nodeName, onMessage, onError) {
-  return connect('nodeLogs', nodeName, onMessage, onError)
-}
-
-/**
  * Force-disconnect a socket
  *
  * @param ws Socket instance

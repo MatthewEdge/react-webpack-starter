@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { connect, disconnect } from './SocketMaster'
+import { connect, disconnect } from '../SocketMaster'
 
 const NODE_LOGS_CHANNEL = 'nodeLogs'
 

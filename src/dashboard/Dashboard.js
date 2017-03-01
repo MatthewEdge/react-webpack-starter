@@ -15,19 +15,17 @@ class Dashboard extends React.Component {
     }
   }
 
-  componentWillMount() {
-    // TODO extract to REST call
-    const nodes = [
-      { name: 'consul-0' },
-      { name: 'consul-1' },
-      { name: 'database-0' },
-      { name: 'database-1' },
-      { name: 'spark-worker-0' },
-      { name: 'spark-worker-1' }
-    ]
-
+  componentDidMount() {
+    // This would normally be in a REST call
     this.setState({
-      nodes
+      nodes: [
+        { name: 'consul-0' },
+        { name: 'consul-1' },
+        { name: 'database-0' },
+        { name: 'database-1' },
+        { name: 'spark-worker-0' },
+        { name: 'spark-worker-1' }
+      ]
     })
   }
 

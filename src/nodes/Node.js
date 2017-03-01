@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import { connect, disconnect } from './SocketMaster'
+import { connect, disconnect } from '../SocketMaster'
 import { navigate } from '../Navigator'
 
 import styles from './Node.css'
