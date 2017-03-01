@@ -1,7 +1,7 @@
 /* @author medge */
 
 import React from 'react'
-import Node from './nodes/Node'
+import Node from '../nodes/Node'
 
 import styles from './Dashboard.css'
 
@@ -21,7 +21,7 @@ class Dashboard extends React.Component {
       { name: 'consul-0' },
       { name: 'consul-1' },
       { name: 'database-0' },
-      { name: 'database-0' },
+      { name: 'database-1' },
       { name: 'spark-worker-0' },
       { name: 'spark-worker-1' }
     ]

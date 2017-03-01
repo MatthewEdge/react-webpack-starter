@@ -4,7 +4,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, browserHistory } from 'react-router'
 
-import Dashboard from './Dashboard'
+import Dashboard from './dashboard/Dashboard'
 import NodeLog from './nodes/NodeLog'
 
 render(
