@@ -5,7 +5,7 @@ import Node from './nodes/Node'
 
 import styles from './Dashboard.css'
 
-class NodeGrid extends React.Component {
+class Dashboard extends React.Component {
 
   constructor(props) {
     super(props)
@@ -18,12 +18,12 @@ class NodeGrid extends React.Component {
   componentWillMount() {
     // TODO extract to REST call
     const nodes = [
-      { name: 'ap-service-discovery-server-0' },
-      { name: 'apim-api-manager-database-initial' },
-      { name: 'apim-api-manager-user-store-initial' },
-      { name: 'apim-api-manager-key-manager-0' },
-      { name: 'apim-api-manager-publisher-0' },
-      { name: 'apim-api-manager-gateway-manager-0' }
+      { name: 'consul-0' },
+      { name: 'consul-1' },
+      { name: 'database-0' },
+      { name: 'database-0' },
+      { name: 'spark-worker-0' },
+      { name: 'spark-worker-1' }
     ]
 
     this.setState({
@@ -42,4 +42,4 @@ class NodeGrid extends React.Component {
   }
 }
 
-export default NodeGrid
+export default Dashboard
