@@ -1,6 +1,6 @@
 # React & Webpack Starter
 
-Starter project for current React / Webpack / CSS Modules
+Starter project for current React / Webpack / CSS Modules.
 
 ## Features
 
@@ -24,6 +24,18 @@ Run development server:
 npm start
 ```
 
+Or, if you are running Docker, there is a `Dockerfile` and a `docker-compose.yml` file available and 
+thus you can also run with:
+
+```
+docker-compose up -d
+```
+
+You can then check the status of the container with:
+
+```
+docker logs rws
+```
 
 ## Testing
 

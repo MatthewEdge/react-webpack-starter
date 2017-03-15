@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-const NODE_SOCKET = 'http://localhost:8080/'
+const NODE_SOCKET = 'ws://127.0.0.1:8080/'
 
 /**
  * Create a new Socket connection to the given channel

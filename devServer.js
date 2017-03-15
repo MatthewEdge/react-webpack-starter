@@ -8,7 +8,7 @@ let wss = require('socket.io')(http)
 
 const PORT = 8080
 
-wss.on('error', (err) => console.error(err))
+wss.on('error', (errn) => console.error(err))
 
 wss.on('connection', (client) => {
   // Setup WebSocket handlers

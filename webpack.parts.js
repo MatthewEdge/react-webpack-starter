@@ -24,6 +24,7 @@ exports.devServer = function(devPort) {
       hot: true,
       inline: true,
       historyApiFallback: true,
+      host: '0.0.0.0',
       port: devPort,
       stats: 'errors-only'
     }
