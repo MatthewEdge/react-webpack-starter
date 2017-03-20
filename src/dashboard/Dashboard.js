@@ -1,6 +1,8 @@
 /* @author medge */
 
 import React from 'react'
+
+import Header from './header/Header'
 import Node from '../nodes/Node'
 
 import styles from './Dashboard.css'
@@ -31,10 +33,13 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className={styles.grid}>
-        {this.state.nodes.map(nodeDef =>
-          <Node node={nodeDef} key={nodeDef.name} />
-        )}
+      <div>
+        <Header />
+        <div className={styles.grid}>
+          {this.state.nodes.map(nodeDef =>
+            <Node node={nodeDef} key={nodeDef.name} />
+          )}
+        </div>
       </div>
     )
   }
