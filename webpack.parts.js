@@ -4,12 +4,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 // devtool config
 exports.devTool = function(env) {
-  if(env === 'production') {
-    return {
-      devtool: false // TODO what should this be?
-    }
-  }
-
   return {
     devtool: 'source-map'
   }
