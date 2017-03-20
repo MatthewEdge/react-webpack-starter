@@ -6,10 +6,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "clean": "rimraf ./public",
     "start": "npm-run-all --parallel wds devServer",
     "test": "mocha --require babel-register --require test/testHelpers.js \"src/**/*.spec.js\" --recursive",
-    "build": "webpack --progress --colors --env develop",
-    "dist": "webpack -p --env production",
+    "build": "npm run clean && webpack --progress --colors --env develop",
+    "dist": "npm run clean && webpack -p --env production",
     "wds": "webpack-dev-server --progress --colors",
     "devServer": "node devServer.js",
     "lintFix": "eslint ./src --fix"
@@ -41,6 +42,7 @@
     "npm-run-all": "4.0.2",
     "react-addons-test-utils": "15.4.2",
     "react-hot-loader": "3.0.0-beta.6",
+    "rimraf": "^2.6.1",
     "socket.io": "1.7.3",
     "style-loader": "0.14.1",
     "url-loader": "0.5.8",

@@ -31,15 +31,17 @@ module.exports = function(env) {
 const Common = merge([
   {
     entry: {
-      main: './src/index.js'
+      app: [
+        path.join(__dirname, 'src', 'index.js')
+      ],
     },
     output: {
-      publicPath: '/',
       path: path.join(__dirname, 'public'),
-      filename: '[name].bundle.js' // From entry key
+      filename: '[name].bundle.js',
+      sourceMapFilename: '[name].[hash].bundle.map'
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.css']
+      extensions: [ '.js', '.jsx', '.css' ]
     },
     module: {
       rules: [
@@ -82,6 +84,11 @@ const Common = merge([
       ]
     },
     plugins: [
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendors',
+        fileName: 'vendors.[hash].js',
+        minChunks: Infinity
+      }),
       new HtmlWebpackPlugin({
         filename: 'index.html',
         template: path.join(__dirname, 'src', 'template.html'),
