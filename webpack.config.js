@@ -38,7 +38,7 @@ const Common = merge([
     },
     output: {
       path: path.join(__dirname, 'public'),
-      filename: '[name].bundle.js',
+      filename: '[name].[hash].bundle.js',
       sourceMapFilename: '[name].[hash].bundle.map'
     },
     resolve: {
