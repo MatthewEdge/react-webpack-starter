@@ -34,6 +34,7 @@ const Common = merge([
       app: [
         path.join(__dirname, 'src', 'index.js')
       ],
+      vendors: [ 'react', 'react-dom', 'react-router', 'socket.io-client' ]
     },
     output: {
       path: path.join(__dirname, 'public'),
