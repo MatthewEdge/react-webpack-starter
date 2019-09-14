@@ -1,9 +1,9 @@
 /* @author medge */
 
 import React from 'react'
-
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { connect, disconnect } from '../SocketMaster'
-import { navigate } from '../Navigator'
 
 import styles from './Node.css'
 
@@ -35,7 +35,6 @@ class Node extends React.Component {
     this.down = this.down.bind(this)
     this.provision = this.provision.bind(this)
     this.suspend = this.suspend.bind(this)
-    this.logs = this.logs.bind(this)
     this.triggerRunning = this.triggerRunning.bind(this)
     this.onMessage = this.onMessage.bind(this)
     this.onError = this.onError.bind(this)
@@ -106,10 +105,6 @@ class Node extends React.Component {
     }
   }
 
-  logs() {
-    navigate(`/logs/${this.props.node.name}`)
-  }
-
   render() {
     const nodeName = this.state.node
     const status = this.state.status
@@ -125,7 +120,9 @@ class Node extends React.Component {
           <button onClick={this.down}>Down</button>
           <button onClick={this.provision}>Provision</button>
           <button onClick={this.suspend}>Suspend</button>
-          <button onClick={this.logs}>Logs</button>
+          <button>
+            <Link to={`/logs/${this.props.node.name}`}>Logs</Link>
+          </button>
         </p>
       </div>
     )
@@ -133,7 +130,7 @@ class Node extends React.Component {
 }
 
 Node.propTypes = {
-  node: React.PropTypes.object.isRequired
+  node: PropTypes.object.isRequired
 }
 
 export default Node

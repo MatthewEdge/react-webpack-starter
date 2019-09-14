@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { connect, disconnect } from '../SocketMaster'
 
@@ -56,7 +57,7 @@ class NodeLog extends React.Component {
 
 NodeLog.propTypes = {
   // TODO how to validate a prop that is set by react-router and satisfy eslint?
-  params: React.PropTypes.object.isRequired
+  params: PropTypes.object.isRequired
 }
 
 export default NodeLog

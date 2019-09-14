@@ -1,13 +1,14 @@
-/* eslint-env mocha */
-
 import React from 'react'
+import { configure, shallow }  from 'enzyme'
 import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 
 // Component
 import Dashboard from './Dashboard'
 
-const wrapper = shallow(<Dashboard />);
+configure({ adapter: new Adapter() })
+
+const wrapper = shallow(<Dashboard />)
 
 describe('<Dashboard />', () => {
   it('should render without exploding', () => {
