@@ -3,11 +3,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { connect, disconnect } from '../SocketMaster'
 
 import styles from './Node.css'
-
-const NODE_INFO_CHANNEL = 'nodeInfo'
 
 const STATES = {
   RUNNING: 'running',
@@ -17,9 +14,6 @@ const STATES = {
   ERROR: 'error'
 }
 
-/**
- * Control element for a particular Vagrant Node
- */
 class Node extends React.Component {
   constructor(props) {
     super(props)
@@ -38,15 +32,6 @@ class Node extends React.Component {
     this.triggerRunning = this.triggerRunning.bind(this)
     this.onMessage = this.onMessage.bind(this)
     this.onError = this.onError.bind(this)
-  }
-
-  componentDidMount() {
-    // Connect to the server for Node Logs
-    this.socket = connect(NODE_INFO_CHANNEL, this.state.node, this.onMessage, this.onError)
-  }
-
-  componentWillUnmount() {
-    disconnect(this.socket)
   }
 
   onMessage(data) {

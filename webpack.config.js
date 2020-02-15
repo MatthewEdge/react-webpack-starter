@@ -7,7 +7,7 @@ module.exports = {
   devtool: "cheap-eval-source-map",
   entry: {
     app: [path.join(__dirname, "src", "index.js")],
-    vendors: ["react", "react-dom", "react-router", "socket.io-client"]
+    vendors: ["react", "react-dom", "react-router"]
   },
   output: {
     path: path.join(__dirname, "public"),
@@ -15,7 +15,10 @@ module.exports = {
     sourceMapFilename: "[name].[hash].bundle.map"
   },
   resolve: {
-    extensions: [".js", ".jsx", ".css", ".scss"]
+    extensions: [".js", ".jsx", ".css", ".scss"],
+    alias: {
+      "@styles": path.resolve(__dirname, "src", "scss")
+    }
   },
   module: {
     rules: [

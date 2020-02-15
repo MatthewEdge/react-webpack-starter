@@ -1,16 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { connect, disconnect } from '../SocketMaster'
-
-const NODE_LOGS_CHANNEL = 'nodeLogs'
-
 class NodeLog extends React.Component {
 
   constructor(props) {
     super(props)
-
-    this.socket = null
 
     this.onMessage = this.onMessage.bind(this)
     this.onError = this.onError.bind(this)
@@ -19,15 +13,6 @@ class NodeLog extends React.Component {
       node: this.props.params.nodeName,
       logs: []
     }
-  }
-
-  componentDidMount() {
-    // Connect to the server for Node Logs
-    this.socket = connect(NODE_LOGS_CHANNEL, this.state.node, this.onMessage, this.onError)
-  }
-
-  componentWillUnmount() {
-    disconnect(this.socket)
   }
 
   onMessage(data) {
@@ -56,7 +41,6 @@ class NodeLog extends React.Component {
 }
 
 NodeLog.propTypes = {
-  // TODO how to validate a prop that is set by react-router and satisfy eslint?
   params: PropTypes.object.isRequired
 }
 
