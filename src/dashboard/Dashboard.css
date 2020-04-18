@@ -1,15 +1,15 @@
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 @media (max-width: 400px) {
-    .grid {
-        display: block;
-    }
+  .grid {
+    display: block;
+  }
 }

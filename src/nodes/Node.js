@@ -1,17 +1,17 @@
 /* @author medge */
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import React from "react"
+import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 
-import styles from './Node.css'
+import styles from "./Node.css"
 
 const STATES = {
-  RUNNING: 'running',
-  LOADING: 'loading',
-  UP: 'up',
-  DOWN: 'down',
-  ERROR: 'error'
+  RUNNING: "running",
+  LOADING: "loading",
+  UP: "up",
+  DOWN: "down",
+  ERROR: "error",
 }
 
 class Node extends React.Component {
@@ -20,7 +20,7 @@ class Node extends React.Component {
 
     this.state = {
       node: this.props.node.name,
-      status: STATES.LOADING
+      status: STATES.LOADING,
     }
 
     // Init function bindings
@@ -37,7 +37,7 @@ class Node extends React.Component {
   onMessage(data) {
     console.log(`STATUS: ${data.status}`)
     this.setState({
-      status: data.status
+      status: data.status,
     })
   }
 
@@ -45,7 +45,7 @@ class Node extends React.Component {
     console.error(`Error receiving info: ${JSON.stringify(e)}`)
 
     this.setState({
-      status: 'Error'
+      status: "Error",
     })
   }
 
@@ -53,13 +53,12 @@ class Node extends React.Component {
     const _status = this.state.status.toLowerCase()
 
     if (_status === STATES.UP) {
-      return 'green'
-    }
-    else if ([STATES.RUNNING, STATES.LOADING].includes(_status)) {
-      return 'black'
+      return "green"
+    } else if ([STATES.RUNNING, STATES.LOADING].includes(_status)) {
+      return "black"
     }
 
-    return 'red'
+    return "red"
   }
 
   up() {
@@ -85,7 +84,7 @@ class Node extends React.Component {
   triggerRunning() {
     if (this.state.status !== STATES.RUNNING) {
       this.setState({
-        status: STATES.RUNNING
+        status: STATES.RUNNING,
       })
     }
   }
@@ -98,7 +97,9 @@ class Node extends React.Component {
       <div className={styles.node}>
         <h3>{nodeName}</h3>
         <p className={styles.status}>
-          <span className={styles.statusText} style={{ color: this.colorForStatus() }}>{status.toUpperCase()}</span>
+          <span className={styles.statusText} style={{ color: this.colorForStatus() }}>
+            {status.toUpperCase()}
+          </span>
         </p>
         <p className={styles.buttons}>
           <button onClick={this.up}>Up</button>
@@ -115,7 +116,7 @@ class Node extends React.Component {
 }
 
 Node.propTypes = {
-  node: PropTypes.object.isRequired
+  node: PropTypes.object.isRequired,
 }
 
 export default Node

@@ -1,8 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react"
+import PropTypes from "prop-types"
 
 class NodeLog extends React.Component {
-
   constructor(props) {
     super(props)
 
@@ -11,13 +10,13 @@ class NodeLog extends React.Component {
 
     this.state = {
       node: this.props.params.nodeName,
-      logs: []
+      logs: [],
     }
   }
 
   onMessage(data) {
     this.setState({
-      logs: data.logs
+      logs: data.logs,
     })
   }
 
@@ -25,7 +24,7 @@ class NodeLog extends React.Component {
     console.error(`Error receiving logs: ${JSON.stringify(e)}`)
 
     this.setState({
-      logs: ['Error fetching logs']
+      logs: ["Error fetching logs"],
     })
   }
 
@@ -33,15 +32,14 @@ class NodeLog extends React.Component {
     return (
       <div>
         <p>{this.state.node}</p>
-        <p>{this.state.logs.join('\n')}</p>
+        <p>{this.state.logs.join("\n")}</p>
       </div>
     )
   }
-
 }
 
 NodeLog.propTypes = {
-  params: PropTypes.object.isRequired
+  params: PropTypes.object.isRequired,
 }
 
 export default NodeLog

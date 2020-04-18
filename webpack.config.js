@@ -1,7 +1,7 @@
-const webpack = require("webpack")
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const PrettierPlugin = require("prettier-webpack-plugin")
 
 module.exports = {
   devtool: "cheap-eval-source-map",
@@ -69,6 +69,15 @@ module.exports = {
     ]
   },
   plugins: [
+    new PrettierPlugin({
+      printWidth: 120,
+      tabWidth: 2,
+      useTabs: false,
+      semi: false,
+      encoding: 'utf-8',
+      bracketSpacing: true,
+      endOfLine: 'lf',
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
       chunkFilename: '[id].css',

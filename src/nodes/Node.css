@@ -1,23 +1,23 @@
 .node {
-    flex: 0 1 32%;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #000;
-    box-sizing: border-box;
+  flex: 0 1 32%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #000;
+  box-sizing: border-box;
 }
 
 .node h3 {
-    margin-top: 0;
-    text-align: center;
+  margin-top: 0;
+  text-align: center;
 }
 
 .status {
-    text-align: center;
-    font-weight: bold;
+  text-align: center;
+  font-weight: bold;
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
 }
