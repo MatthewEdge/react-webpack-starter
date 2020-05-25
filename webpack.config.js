@@ -46,12 +46,6 @@ module.exports = {
           'css-loader',
         ]
       },
-      {
-        test: /\.html$/,
-        use: [
-          { loader: "html-loader" }
-        ]
-      },
       // Assets loaders
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
