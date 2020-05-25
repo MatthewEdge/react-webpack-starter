@@ -12,7 +12,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, "public"),
     filename: "[name].[hash].bundle.js",
-    sourceMapFilename: "[name].[hash].bundle.map"
+    sourceMapFilename: "[name].[hash].bundle.map",
+    publicPath: '/',
   },
   resolve: {
     extensions: [".js", ".jsx", ".css", ".scss"],
