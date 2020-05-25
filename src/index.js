@@ -1,18 +1,16 @@
-/* @author medge */
-
 import React from "react"
 import { render } from "react-dom"
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 import Dashboard from "./dashboard/Dashboard"
 import NodeLog from "./nodes/NodeLog"
 
 render(
   <Router>
-    <div>
-      <Route exact path="/" component={Dashboard} />
+    <Switch>
       <Route path="/logs/:nodeName" component={NodeLog} />
-    </div>
+      <Route exact path="/" component={Dashboard} />
+    </Switch>
   </Router>,
   document.querySelector("#app")
 )
