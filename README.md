@@ -3,6 +3,10 @@
 Starter project for current React / Webpack / SCSS.
 Testing using Mocha, Chai, and Enzyme
 
+## Dependency Updates
+
+Run `make` to run the dependency update, install, and audit process
+
 ## Running
 
 ```
